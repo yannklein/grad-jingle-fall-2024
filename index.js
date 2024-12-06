@@ -1,9 +1,20 @@
+const timer = () => {
+  const time = document.querySelector("#time");
+  const startTime = new Date();
+  setInterval(() => {
+    time.classList.remove("d-none")
+    const diff = (new Date() - startTime) / 1000;
+    time.innerText = Math.floor(diff);
+  }, 1000);
+}
+
 // Jingle steps
 const STEPS = {
   longTimeAgo: 0, // from play to "Long Time Ago.." intro
   demoday: 4, // from "Long time ago..." to "Demo Day" duration
+  closeDemoday: 10,
   rollText: 10, // from demo day to Rolling text duration
-  closing: 100 //from text rolling to closing
+  closing: 80 //from text rolling to closing
 };
 for (const key in STEPS) {
   STEPS[key] = STEPS[key]*1000;
@@ -38,32 +49,33 @@ const showLongTimeAgo = () => {
 };
 const showDemoDay = () => {
   show(demoday);
-  demoday.style.transition = `font-size ${STEPS.rollText/2000}s ease-out, opacity 0.3s, visibility 0.3s`;
+  demoday.style.transition = `font-size ${STEPS.closeDemoday/2000}s ease-out, opacity 0.3s, visibility 0.3s`;
   demoday.style.fontSize = '120px';
   
 };
 const showRollingText = () => {
   show(rollText);
-  rollText.style.transition = `transform ${STEPS.closing/1000}s linear, opacity 1s, visibility 1s`;
-  rollText.style.transform = `translate(-50%, -50%) perspective(130px) rotateX(20deg) translateY(-62%)`
+  rollText.style.transition = `transform ${STEPS.closing*1.2/1000}s linear, opacity 1s, visibility 1s`;
+  rollText.style.transform = `translate(-50%, -50%) perspective(130px) rotateX(20deg) translateY(-300%)`
 }
 
 // Main jngle function
 const initJingle = (event) => {
+  // timer();
   event.preventDefault();
   setTimeout(showLongTimeAgo, STEPS.longTimeAgo);
-  setTimeout(() => hide(longTimeAgo), STEPS.demoday - 1000)
+  setTimeout(() => hide(longTimeAgo), STEPS.demoday)
 
   setTimeout(startSong, STEPS.demoday);
   setTimeout(stopSong, STEPS.closing);
 
   setTimeout(showDemoDay, STEPS.demoday);
-  setTimeout(() => hide(demoday), STEPS.rollText)
+  setTimeout(() => hide(demoday), STEPS.closeDemoday)
 
-  setTimeout(showRollingText, STEPS.rollText - 1000);
+  setTimeout(showRollingText, STEPS.rollText);
   setTimeout(() => hide(rollText), STEPS.closing);
 
-  setTimeout(() => show(goodLuck), STEPS.closing + 200);
+  setTimeout(() => show(goodLuck), STEPS.closing);
 }
 
 // Play button click listener

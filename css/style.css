@@ -17,7 +17,7 @@ h1 {
     1px 1px 0px #FFD64E, 
     -1px -1px 0px #FFD64E, 
     -1px 1px 0px #FFD64E;
-  margin: 32px;
+  margin: 8px;
   text-align: center;
   font-size: 600px;
 }
@@ -58,18 +58,20 @@ h1 {
 #title {
   font-family: 'Pathway Gothic One', sans-serif;
   font-size: 64px;
-  margin: 64px 0;
+  margin: 24px 0;
 }
 
 #text-roll {
-  width: 600px;
+  height: 600px;
+  width: 700px;
   margin: 0 auto;
   text-align: center;
-  transform: translate(-50%, -50%) perspective(130px) rotateX(20deg) translateY(90%);
+  transform: translate(-50%, -50%) perspective(110px) rotateX(10deg) translateY(90%);
 }
 
 #text-roll p {
   text-align: justify;
+  font-size: 24px;
 }
 
 .text-center-fixed {
